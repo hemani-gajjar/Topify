@@ -1,5 +1,18 @@
 {
+  "name": "topify",
+  "version": "1.0.0",
+  "description": "A web itnerface to view your top tracks and artists on Spotify",
+  "main": "server/server.js",
   "dependencies": {
     "font-awesome": "^4.7.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hemani Gajjar",
+  "license": "ISC",
+  "engines": {
+    "node": "14.15.0"
   }
 }

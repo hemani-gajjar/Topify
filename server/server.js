@@ -57,4 +57,11 @@ app.post("/login", function (req, res) {
     });
 });
 
-app.listen(3001);
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3001;
+}
+
+app.listen(port, function () {
+  console.log("Server has started successfully");
+});
