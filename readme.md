@@ -26,7 +26,7 @@ Project Repository Link: https://github.com/hemani-gajjar/Topify
 5. View top tracks and artists based on the time duration selected.
 
 ## Demonstration video
-Find the full video here or take a look at the full video in the `client/public/Videos` folder.
+Take a look at the video or find the video [here](https://github.com/hemani-gajjar/Topify/tree/master/client/public/Videos)
 
 https://user-images.githubusercontent.com/68991381/178066955-7e9ef2d5-6939-4359-a6d3-554f889bb7f5.mp4
 
