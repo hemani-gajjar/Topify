@@ -28,8 +28,6 @@ Project Repository Link: https://github.com/hemani-gajjar/Topify
 ## Demonstration video
 Find the full video here or take a look at the full video in the `client/public/Videos` folder.
 
-https://user-images.githubusercontent.com/83028360/148637079-95c08bea-893c-4fc5-9efc-0c0ac75b47e8.mp4
-
 https://user-images.githubusercontent.com/68991381/178066955-7e9ef2d5-6939-4359-a6d3-554f889bb7f5.mp4
 
 
