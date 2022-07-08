@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const SpotifyWebApi = require("spotify-web-api-node");
-const lyricsFinder = require("lyrics-finder");
+var path = require("path");
 const app = express();
 
 //cors errors
@@ -10,6 +10,11 @@ app.use(cors());
 //bodyparser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "build")));
+
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 app.post("/refresh", (req, res) => {
   const refreshToken = req.body.refreshToken;
