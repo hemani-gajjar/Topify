@@ -207,13 +207,14 @@ export default function HomePage({ code }) {
         console.log("Something went wrong!", err);
       }
     );
+  });
 
   return (
     <Container fluid className="main-container">
       <UserIcon user={userDetails} />
       <h1>
         Your top tracks of <DropDownTracks changeSelect={changeSelect} />
-      </h1>{" "}
+      </h1>
 
       <div className="grid-container">
         {screenWidth < 660 &&
