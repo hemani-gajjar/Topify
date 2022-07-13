@@ -7,6 +7,10 @@ import TopArtist from "./TopArtist";
 import DropDownTracks from "./DropDownTracks";
 import DropDownArtists from "./DropDownArtists";
 import "font-awesome/css/font-awesome.min.css";
+import UserIcon from "./UserIcon";
+import GeneratePlaylist from "./GeneratePlaylist";
+import ByTheDecades from "./ByTheDecades";
+import Footer from "./Footer";
 
 const spotifyApi = new SpotifyWebApi({
   clientId: "b256d996ac324a3fa6765ae4287a195f",
@@ -18,6 +22,7 @@ export default function HomePage({ code }) {
   const [topArtists, setTopArtists] = useState([]);
   const [trackDuration, setTrackDuration] = useState("long_term");
   const [artistsDuration, setArtistsDuration] = useState("short_term");
+  const [userDetails, setUserDetails] = useState({});
   const screenWidth = window.screen.width;
 
   const secondTopArtist = topArtists.slice(0, 1).map((artist) => artist.name);
@@ -80,26 +85,6 @@ export default function HomePage({ code }) {
     });
   });
 
-  //Logout Button
-  document.addEventListener("DOMContentLoaded", function () {
-    const logoutBtn = document.querySelector(".logout-btn");
-    const logoutLink = document.querySelector(".logout-btn a");
-
-    logoutBtn.addEventListener("click", function (e) {
-      logoutBtn.classList.toggle("logout-pressed");
-      logoutLink.classList.toggle("show-logout");
-
-      //prevent trigerring click event twice
-      e.stopImmediatePropagation();
-    });
-
-    logoutLink.addEventListener("click", function (e) {
-      window.open(" https://accounts.spotify.com/en/logout");
-      //prevent trigerring click event twice
-      e.stopImmediatePropagation();
-    });
-  });
-
   function changeSelect() {
     const dropDownTracks = document.querySelector(".drop-down-tracks");
     setTrackDuration(dropDownTracks.value);
@@ -121,6 +106,7 @@ export default function HomePage({ code }) {
     // Get a User’s Top Tracks
     spotifyApi.getMyTopTracks({ limit: 50, time_range: trackDuration }).then(
       function (data) {
+        console.log(data.body);
         setTopTracks(
           data.body.items.map(function (track) {
             const largestAlbumImage = track.album.images.reduce(function (
@@ -135,11 +121,25 @@ export default function HomePage({ code }) {
             },
             track.album.images[0]);
 
+            var date = new Date(track.album.release_date);
+            var options = {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            };
+
             return {
               artist: track.artists[0].name,
               title: track.name,
               uri: track.uri,
               albumUrl: largestAlbumImage.url,
+              popularity: track.popularity,
+              trackNumber: track.track_number,
+              index: data.body.items.indexOf(track) + 1,
+              type: track.album.album_type,
+              albumName: track.album.name,
+              releaseDate: date.toLocaleDateString("en-US", options),
+              totalTracks: track.album.total_tracks,
             };
           })
         );
@@ -156,6 +156,7 @@ export default function HomePage({ code }) {
     // Get a User’s Top Artists
     spotifyApi.getMyTopArtists({ limit: 50, time_range: artistsDuration }).then(
       function (data) {
+        console.log(data.body.items);
         setTopArtists(
           data.body.items.map(function (artist) {
             const largestAlbumImage = artist.images.reduce(function (
@@ -175,6 +176,8 @@ export default function HomePage({ code }) {
               popularity: artist.popularity,
               uri: artist.uri,
               image: largestAlbumImage.url,
+              index: data.body.items.indexOf(artist) + 1,
+              genres: artist.genres,
             };
           })
         );
@@ -185,17 +188,33 @@ export default function HomePage({ code }) {
     );
   }, [accessToken, artistsDuration]);
 
+  useEffect(() => {
+    if (!accessToken) {
+      console.log("No Acces Token");
+      return;
+    }
+
+    spotifyApi.getMe().then(
+      function (data) {
+        console.log("Some information about the authenticated user", data.body);
+        var user = data.body;
+        setUserDetails({
+          name: user.display_name,
+          image: user.images[0].url,
+        });
+      },
+      function (err) {
+        console.log("Something went wrong!", err);
+      }
+    );
+
   return (
     <Container fluid className="main-container">
+      <UserIcon user={userDetails} />
       <h1>
-        Your top songs of <DropDownTracks changeSelect={changeSelect} />
+        Your top tracks of <DropDownTracks changeSelect={changeSelect} />
       </h1>{" "}
-      <button type="button" className="logout-btn">
-        <a href="/login" className="logout-link">
-          Logout
-        </a>
-        <i className="fa fa-chevron-left"></i>
-      </button>
+
       <div className="grid-container">
         {screenWidth < 660 &&
           screenWidth > 460 &&
@@ -316,6 +335,9 @@ export default function HomePage({ code }) {
           See More
         </button>
       </div>
+      <GeneratePlaylist />
+      <ByTheDecades />
+      <Footer />
     </Container>
   );
 }

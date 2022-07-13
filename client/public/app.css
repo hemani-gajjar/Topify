@@ -56,6 +56,7 @@
   padding: 0;
   margin: 0 1rem;
   font-weight: bolder;
+  text-align: center;
 }
 
 .login-container h3 {
@@ -414,7 +415,7 @@
 }
 
 .main-container h1 {
-  padding: 1.6rem 0 1rem 0;
+  padding: 0rem 0 1.5rem 0;
   font-size: 2rem;
 }
 
@@ -649,4 +650,31 @@ footer a {
 
 footer a:hover {
   color: #b2b1b9;
+}
+
+/* ----------- userIcon ------------ */
+
+.userIcon {
+  text-align: right;
+}
+
+.userIcon img {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+}
+
+.userIcon button {
+  background: #353753;
+  height: 3rem;
+  border-radius: 1.5rem;
+  width: fit-content;
+}
+.userIcon:hover button {
+  background: #4e527e;
+}
+
+.menu-profile a {
+  text-decoration: none;
+  color: black;
 }
