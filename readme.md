@@ -25,6 +25,13 @@ Project Repository Link: https://github.com/hemani-gajjar/Topify
 4. Choose the time duration from the options "last month", "last 6 months" and "all time". <br/>
 5. View top tracks and artists based on the time duration selected.
 
+## Demonstration video
+Take a look at the video or find the video [here](https://github.com/hemani-gajjar/Topify/tree/master/client/public/Videos)
+
+https://user-images.githubusercontent.com/68991381/178066955-7e9ef2d5-6939-4359-a6d3-554f889bb7f5.mp4
+
+
+
 ### Built With
 
 - [React](https://reactjs.org/)
