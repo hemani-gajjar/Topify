@@ -102,26 +102,12 @@ export default function HomePage({ code }) {
 
   function changeSelect() {
     const dropDownTracks = document.querySelector(".drop-down-tracks");
-
-    if (dropDownTracks.value === "long_term") {
-      setTrackDuration("long_term");
-    } else if (dropDownTracks.value === "medium_term") {
-      setTrackDuration("medium_term");
-    } else if (dropDownTracks.value === "short_term") {
-      setTrackDuration("short_term");
-    }
+    setTrackDuration(dropDownTracks.value);
   }
 
   function handleChangeArtist() {
     const dropDownArtists = document.querySelector(".drop-down-artists");
-
-    if (dropDownArtists.value === "long_term") {
-      setArtistsDuration("long_term");
-    } else if (dropDownArtists.value === "medium_term") {
-      setArtistsDuration("medium_term");
-    } else if (dropDownArtists.value === "short_term") {
-      setArtistsDuration("short_term");
-    }
+    setArtistsDuration(dropDownArtists.value);
   }
 
   useEffect(() => {
@@ -132,10 +118,9 @@ export default function HomePage({ code }) {
   useEffect(() => {
     if (!accessToken) return;
 
-    //Making the API Request /* Get a User’s Top Tracks*/
-    spotifyApi.getMyTopTracks({ limit: 20, time_range: trackDuration }).then(
+    // Get a User’s Top Tracks
+    spotifyApi.getMyTopTracks({ limit: 50, time_range: trackDuration }).then(
       function (data) {
-        //data.body.items = my top tracks
         setTopTracks(
           data.body.items.map(function (track) {
             const largestAlbumImage = track.album.images.reduce(function (
@@ -168,11 +153,9 @@ export default function HomePage({ code }) {
   useEffect(() => {
     if (!accessToken) return;
 
-    /* Get a User’s Top Artists*/
-    spotifyApi.getMyTopArtists({ limit: 20, time_range: artistsDuration }).then(
+    // Get a User’s Top Artists
+    spotifyApi.getMyTopArtists({ limit: 50, time_range: artistsDuration }).then(
       function (data) {
-        // topArtists = data.body.items;
-
         setTopArtists(
           data.body.items.map(function (artist) {
             const largestAlbumImage = artist.images.reduce(function (
@@ -211,7 +194,7 @@ export default function HomePage({ code }) {
         <a href="/login" className="logout-link">
           Logout
         </a>
-        <i class="fa fa-chevron-left"></i>
+        <i className="fa fa-chevron-left"></i>
       </button>
       <div className="grid-container">
         {screenWidth < 660 &&
@@ -238,21 +221,21 @@ export default function HomePage({ code }) {
         {screenWidth < 660 &&
           screenWidth > 460 &&
           topTracks
-            .slice(2, 21)
+            .slice(2, 51)
             .map((track) => <TopTrack track={track} key={track.uri} />)}
         {screenWidth < 860 &&
           screenWidth >= 660 &&
           topTracks
-            .slice(3, 21)
+            .slice(3, 51)
             .map((track) => <TopTrack track={track} key={track.uri} />)}
         {screenWidth < 1100 &&
           screenWidth >= 860 &&
           topTracks
-            .slice(4, 21)
+            .slice(4, 51)
             .map((track) => <TopTrack track={track} key={track.uri} />)}
         {(screenWidth >= 1100 || screenWidth <= 460) &&
           topTracks
-            .slice(5, 21)
+            .slice(5, 51)
             .map((track) => <TopTrack track={track} key={track.uri} />)}
       </div>
       <div className="btn-container">
@@ -311,21 +294,21 @@ export default function HomePage({ code }) {
         {screenWidth < 660 &&
           screenWidth > 460 &&
           topArtists
-            .slice(1, 19)
+            .slice(1, 49)
             .map((artist) => <TopArtist artist={artist} key={artist.uri} />)}
         {screenWidth < 860 &&
           screenWidth >= 660 &&
           topArtists
-            .slice(2, 19)
+            .slice(2, 49)
             .map((artist) => <TopArtist artist={artist} key={artist.uri} />)}
         {screenWidth < 1100 &&
           screenWidth >= 860 &&
           topArtists
-            .slice(3, 19)
+            .slice(3, 49)
             .map((artist) => <TopArtist artist={artist} key={artist.uri} />)}
         {(screenWidth >= 1100 || screenWidth) < 460 &&
           topArtists
-            .slice(4, 19)
+            .slice(4, 49)
             .map((artist) => <TopArtist artist={artist} key={artist.uri} />)}
       </div>
       <div className="btn-container">

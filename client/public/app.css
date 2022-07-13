@@ -409,6 +409,10 @@
   text-align: center;
 }
 
+.top-track-card img {
+  border-radius: 0.2rem;
+}
+
 .main-container h1 {
   padding: 1.6rem 0 1rem 0;
   font-size: 2rem;
@@ -583,11 +587,11 @@ select option {
 .btn-container button {
   background-color: #3c3f5f;
   color: #eeeeee;
-  margin-right: 3rem;
+  margin: 1rem 3rem 0rem 0rem;
   outline: 0;
   border: 0;
   width: 8rem;
-  height: 2.1rem;
+  height: 2.5rem;
   border-radius: 0.5rem;
   font-size: 1.1rem;
 }
@@ -607,6 +611,7 @@ select option {
 .text-container {
   text-align: left;
   background-color: #3c415c;
+  border-radius: 0.2rem;
   padding: 1.5rem;
   min-height: 210px;
   max-width: 250px;
@@ -627,6 +632,7 @@ select option {
 }
 
 /* -------------- FOOTER------------------ */
+
 footer {
   width: 98%;
   font-weight: normal;
@@ -635,4 +641,12 @@ footer {
   position: absolute;
   bottom: 0;
   padding: 1rem;
+}
+
+footer a {
+  color: #4e527e;
+}
+
+footer a:hover {
+  color: #b2b1b9;
 }
