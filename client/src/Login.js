@@ -37,17 +37,15 @@ const Login = () => {
         </p>
       </div>
       <footer>
-        <p>
-          Made out of love for Music &amp; Spotify. Created by{" "}
-          <a
-            href="https://github.com/hemani-gajjar"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Hemani
-          </a>
-          , powered by Spotify
-        </p>
+        Made out of love for Music &amp; Spotify. Created by{" "}
+        <a
+          href="https://github.com/hemani-gajjar"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Hemani
+        </a>
+        , powered by Spotify
       </footer>
     </Container>
   );
