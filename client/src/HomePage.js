@@ -10,6 +10,7 @@ import "font-awesome/css/font-awesome.min.css";
 import UserIcon from "./UserIcon";
 import GeneratePlaylist from "./GeneratePlaylist";
 import UniqueMusic from "./UniqueMusic";
+import Snackbar from "@mui/material/Snackbar";
 
 const spotifyApi = new SpotifyWebApi({
   clientId: "b256d996ac324a3fa6765ae4287a195f",
@@ -29,6 +30,11 @@ export default function HomePage({ code }) {
   const [recommendations, setRecommendations] = useState([]);
   const [sortedTracks, setSortedTracks] = useState([]);
   const [sortedArtists, setSortedArtists] = useState([]);
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const secondTopArtist = topArtists.slice(0, 1).map((artist) => artist.name);
   const topArtist = topArtists.slice(0, 1).map((artist) => artist.name);
@@ -309,12 +315,14 @@ export default function HomePage({ code }) {
 
     var temp = [];
     var tempIds = [];
-    for (var i = 0; i < 5; i++) {
+    while (temp.length < 5) {
       var randomArtist = topArtists[generateRandom(0, 49)];
-      // console.log(randomArtist);
-      temp.push(randomArtist);
-      tempIds.push(getArtistId(randomArtist.uri));
+      if (temp.indexOf(randomArtist) === -1) {
+        temp.push(randomArtist);
+        tempIds.push(getArtistId(randomArtist.uri));
+      }
     }
+
     setPickedArtists(temp);
     setPickedArtistsIds(tempIds);
   };
@@ -375,7 +383,10 @@ export default function HomePage({ code }) {
     // Add tracks to a playlist
     spotifyApi.addTracksToPlaylist(playlistId, recommendations).then(
       function (data) {
-        console.log("Added tracks to playlist!");
+        if (data.statusCode === 201) {
+          setOpen(true);
+          console.log("Added tracks to playlist!");
+        }
       },
       function (err) {
         console.log("Something went wrong!", err);
@@ -515,6 +526,18 @@ export default function HomePage({ code }) {
         handlePlaylistBtn={handlePlaylistBtn}
         pickedArtists={pickedArtists}
         handleRefresh={handleRefresh}
+      />
+
+      <Snackbar
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        open={open}
+        onClose={handleClose}
+        message="A new playlist has been added. Check out your Spotify!"
+        ContentProps={{
+          sx: {
+            background: "#4e527e",
+          },
+        }}
       />
     </Container>
   );
