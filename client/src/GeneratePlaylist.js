@@ -27,7 +27,7 @@ export default function GeneratePlaylist({
                     <p>
                       <strong>
                         <span style={{ color: "darkgrey" }}>
-                          {artist.genres.slice(0, 4).join(", ")}
+                          {artist.genres.slice(0, 2).join(", ")}
                         </span>
                       </strong>
                     </p>
