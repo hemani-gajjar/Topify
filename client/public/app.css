@@ -678,3 +678,52 @@ footer a:hover {
   text-decoration: none;
   color: black;
 }
+
+/* ------------ Generate Playlists ------------*/
+
+.picked-artists img {
+  height: 7rem;
+  width: 7rem;
+  border-radius: 0.5rem;
+}
+
+.picked-artists .row {
+  align-items: center;
+  display: flex;
+}
+
+.generate-playlist {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: #2c2e43;
+  padding: 0rem 0rem 16vh 0rem;
+}
+
+.generate-playlist .left {
+  flex: 60%;
+}
+
+.generate-playlist .right {
+  flex: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.artist-card {
+  background-color: #2c2e43;
+  width: 10rem;
+  height: 10rem;
+  margin: 0rem;
+  padding: 0rem;
+}
+
+.generate-playlist-container {
+  padding: 1rem 2rem 2rem 3rem;
+  min-height: 60vh;
+}
+
+.generate-playlist-container h1 {
+  margin: 1rem;
+}

@@ -10,7 +10,6 @@ import "font-awesome/css/font-awesome.min.css";
 import UserIcon from "./UserIcon";
 import GeneratePlaylist from "./GeneratePlaylist";
 import ByTheDecades from "./ByTheDecades";
-import Footer from "./Footer";
 
 const spotifyApi = new SpotifyWebApi({
   clientId: "b256d996ac324a3fa6765ae4287a195f",
@@ -24,9 +23,25 @@ export default function HomePage({ code }) {
   const [artistsDuration, setArtistsDuration] = useState("short_term");
   const [userDetails, setUserDetails] = useState({});
   const screenWidth = window.screen.width;
+  const [pickedArtistsIds, setPickedArtistsIds] = useState([]);
+  const [pickedArtists, setPickedArtists] = useState([]);
+  const [playlistId, setPlaylistId] = useState("");
+  const [recommendations, setRecommendations] = useState([]);
 
   const secondTopArtist = topArtists.slice(0, 1).map((artist) => artist.name);
   const topArtist = topArtists.slice(0, 1).map((artist) => artist.name);
+
+  const getArtistId = (str) => {
+    return str.split(":")[2];
+  };
+
+  const generateRandom = (min = 0, max = 49) => {
+    var difference = max - min;
+    var rand = Math.random();
+    rand = Math.floor(rand * difference);
+    rand = rand + min;
+    return rand;
+  };
 
   //Button Collapse / Expand
   document.addEventListener("DOMContentLoaded", function () {
@@ -106,7 +121,6 @@ export default function HomePage({ code }) {
     // Get a User’s Top Tracks
     spotifyApi.getMyTopTracks({ limit: 50, time_range: trackDuration }).then(
       function (data) {
-        console.log(data.body);
         setTopTracks(
           data.body.items.map(function (track) {
             const largestAlbumImage = track.album.images.reduce(function (
@@ -156,7 +170,6 @@ export default function HomePage({ code }) {
     // Get a User’s Top Artists
     spotifyApi.getMyTopArtists({ limit: 50, time_range: artistsDuration }).then(
       function (data) {
-        console.log(data.body.items);
         setTopArtists(
           data.body.items.map(function (artist) {
             const largestAlbumImage = artist.images.reduce(function (
@@ -196,7 +209,6 @@ export default function HomePage({ code }) {
 
     spotifyApi.getMe().then(
       function (data) {
-        console.log("Some information about the authenticated user", data.body);
         var user = data.body;
         setUserDetails({
           name: user.display_name,
@@ -207,7 +219,88 @@ export default function HomePage({ code }) {
         console.log("Something went wrong!", err);
       }
     );
-  });
+  }, [accessToken]);
+
+  const handleRefresh = () => {
+    if (!accessToken) return;
+
+    var temp = [];
+    var tempIds = [];
+    for (var i = 0; i < 5; i++) {
+      var randomArtist = topArtists[generateRandom(0, 49)];
+      // console.log(randomArtist);
+      temp.push(randomArtist);
+      tempIds.push(getArtistId(randomArtist.uri));
+    }
+    setPickedArtists(temp);
+    setPickedArtistsIds(tempIds);
+  };
+
+  useEffect(() => {
+    handleRefresh();
+  }, [topArtists]);
+
+  const handlePlaylistBtn = () => {
+    // Create a public playlist
+    spotifyApi
+      .createPlaylist("Favourites Mixtape", {
+        description: `Playlist based on ${pickedArtists[0].name}, ${pickedArtists[1].name}, ${pickedArtists[2].name}, ${pickedArtists[3].name} and ${pickedArtists[4].name}`,
+        public: true,
+      })
+      .then(
+        function (data) {
+          // console.log(data);
+          setPlaylistId(data.body.id);
+          // console.log(data.body.id);
+          console.log("Created playlist!");
+        },
+        function (err) {
+          console.log("Something went wrong!", err);
+        }
+      );
+
+    //Get Recommendations Based on Seeds
+    spotifyApi
+      .getRecommendations({
+        min_energy: 0.4,
+        seed_artists: pickedArtistsIds,
+        min_popularity: 50,
+      })
+      .then(
+        function (data) {
+          let recommendations = data.body;
+          console.log(recommendations);
+          setRecommendations(
+            data.body.tracks.map(function (track) {
+              return track.uri;
+            })
+          );
+        },
+        function (err) {
+          console.log("Something went wrong!", err);
+        }
+      );
+  };
+
+  useEffect(() => {
+    console.log(playlistId);
+    console.log(recommendations);
+    if (playlistId !== "") {
+      addTracks();
+    }
+  }, [recommendations]);
+
+  const addTracks = () => {
+    // Add tracks to a playlist
+    spotifyApi.addTracksToPlaylist(playlistId, recommendations).then(
+      function (data) {
+        console.log("Added tracks to playlist!");
+      },
+      function (err) {
+        console.log("Something went wrong!", err);
+      }
+    );
+  };
 
   return (
     <Container fluid className="main-container">
@@ -336,9 +429,12 @@ export default function HomePage({ code }) {
           See More
         </button>
       </div>
-      <GeneratePlaylist />
-      <ByTheDecades />
-      <Footer />
+      <GeneratePlaylist
+        handlePlaylistBtn={handlePlaylistBtn}
+        pickedArtists={pickedArtists}
+        handleRefresh={handleRefresh}
+      />
+      {/* <ByTheDecades accessToken={accessToken} /> */}
     </Container>
   );
 }
