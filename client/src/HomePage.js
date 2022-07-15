@@ -9,7 +9,7 @@ import DropDownArtists from "./DropDownArtists";
 import "font-awesome/css/font-awesome.min.css";
 import UserIcon from "./UserIcon";
 import GeneratePlaylist from "./GeneratePlaylist";
-import ByTheDecades from "./ByTheDecades";
+import UniqueMusic from "./UniqueMusic";
 
 const spotifyApi = new SpotifyWebApi({
   clientId: "b256d996ac324a3fa6765ae4287a195f",
@@ -27,6 +27,8 @@ export default function HomePage({ code }) {
   const [pickedArtists, setPickedArtists] = useState([]);
   const [playlistId, setPlaylistId] = useState("");
   const [recommendations, setRecommendations] = useState([]);
+  const [sortedTracks, setSortedTracks] = useState([]);
+  const [sortedArtists, setSortedArtists] = useState([]);
 
   const secondTopArtist = topArtists.slice(0, 1).map((artist) => artist.name);
   const topArtist = topArtists.slice(0, 1).map((artist) => artist.name);
@@ -202,8 +204,89 @@ export default function HomePage({ code }) {
   }, [accessToken, artistsDuration]);
 
   useEffect(() => {
+    if (!accessToken) return;
+
+    // Get a User’s Top Tracks of All Time
+    spotifyApi.getMyTopTracks({ limit: 50, time_range: "long_term" }).then(
+      function (data) {
+        setSortedTracks(
+          data.body.items.map(function (track) {
+            const largestAlbumImage = track.album.images.reduce(function (
+              largest,
+              image
+            ) {
+              if (image.height > largest.height) {
+                return image;
+              } else {
+                return largest;
+              }
+            },
+            track.album.images[0]);
+
+            var date = new Date(track.album.release_date);
+            var options = {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            };
+
+            return {
+              artist: track.artists[0].name,
+              title: track.name,
+              uri: track.uri,
+              albumUrl: largestAlbumImage.url,
+              popularity: track.popularity,
+              trackNumber: track.track_number,
+              index: data.body.items.indexOf(track) + 1,
+              type: track.album.album_type,
+              albumName: track.album.name,
+              releaseDate: date.toLocaleDateString("en-US", options),
+              totalTracks: track.album.total_tracks,
+            };
+          })
+        );
+      },
+      function (err) {
+        console.log("Something went wrong!", err);
+      }
+    );
+
+    // Get a User’s Top Artists of all time
+    spotifyApi.getMyTopArtists({ limit: 50, time_range: "long_term" }).then(
+      function (data) {
+        setSortedArtists(
+          data.body.items.map(function (artist) {
+            const largestAlbumImage = artist.images.reduce(function (
+              largest,
+              image
+            ) {
+              if (image.height > largest.height) {
+                return image;
+              } else {
+                return largest;
+              }
+            },
+            artist.images[0]);
+
+            return {
+              name: artist.name,
+              popularity: artist.popularity,
+              uri: artist.uri,
+              image: largestAlbumImage.url,
+              index: data.body.items.indexOf(artist) + 1,
+              genres: artist.genres,
+            };
+          })
+        );
+      },
+      function (err) {
+        console.log("Something went wrong!", err);
+      }
+    );
+  }, [accessToken, artistsDuration]);
+
+  useEffect(() => {
     if (!accessToken) {
-      console.log("No Acces Token");
       return;
     }
 
@@ -249,9 +332,7 @@ export default function HomePage({ code }) {
       })
       .then(
         function (data) {
-          // console.log(data);
           setPlaylistId(data.body.id);
-          // console.log(data.body.id);
           console.log("Created playlist!");
         },
         function (err) {
@@ -429,12 +510,12 @@ export default function HomePage({ code }) {
           See More
         </button>
       </div>
+      <UniqueMusic sortedTracks={sortedTracks} sortedArtists={sortedArtists} />
       <GeneratePlaylist
         handlePlaylistBtn={handlePlaylistBtn}
         pickedArtists={pickedArtists}
         handleRefresh={handleRefresh}
       />
-      {/* <ByTheDecades accessToken={accessToken} /> */}
     </Container>
   );
 }
