@@ -16,7 +16,7 @@ export default function GeneratePlaylist({
           <div className="picked-artists">
             <div className="row">
               {pickedArtists.map((artist) => (
-                <div className="col-sm padding-0">
+                <div className="col-sm padding-0" key={artist.index}>
                   <div className="artist-card">
                     <img src={artist.image} alt="picked-artist"></img>
                     <p>{artist.name}</p>
