@@ -11,6 +11,7 @@ import UserIcon from "./UserIcon";
 import GeneratePlaylist from "./GeneratePlaylist";
 import UniqueMusic from "./UniqueMusic";
 import Snackbar from "@mui/material/Snackbar";
+import Footer from "./Footer";
 
 const spotifyApi = new SpotifyWebApi({
   clientId: "b256d996ac324a3fa6765ae4287a195f",
@@ -539,6 +540,7 @@ export default function HomePage({ code }) {
           },
         }}
       />
+      <Footer />
     </Container>
   );
 }
