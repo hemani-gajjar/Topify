@@ -727,3 +727,28 @@ footer a:hover {
 .generate-playlist-container h1 {
   margin: 1rem;
 }
+
+/*-----------  Unique Music Section -----------------*/
+
+.unique-music {
+  padding: 2rem;
+}
+
+.unique-music img {
+  height: 8rem;
+  width: 8rem;
+  border-radius: 0.5rem;
+}
+
+.unique-tracks h1,
+.unique-artists h1 {
+  padding: 0rem 0rem 3rem 0rem;
+}
+
+.unique-tracks {
+  padding: 1rem;
+}
+
+.unique-artists {
+  padding: 3rem 1rem 2rem 1rem;
+}
