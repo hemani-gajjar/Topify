@@ -2,6 +2,8 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import RefreshRoundedIcon from "@mui/icons-material/RefreshRounded";
+import Tooltip from "@mui/material/Tooltip";
+import { alpha } from "@mui/material";
 
 export default function GeneratePlaylist({
   handlePlaylistBtn,
@@ -18,7 +20,9 @@ export default function GeneratePlaylist({
               {pickedArtists.map((artist) => (
                 <div className="col-sm padding-0" key={artist.index}>
                   <div className="artist-card">
-                    <img src={artist.image} alt="picked-artist"></img>
+                    <a href={artist.uri}>
+                      <img src={artist.image} alt="picked-artist"></img>
+                    </a>
                     <p>{artist.name}</p>
                     <p>
                       <strong>
@@ -35,18 +39,31 @@ export default function GeneratePlaylist({
         </div>
 
         <div className="right">
-          <Typography sx={{ maxWidth: 200, p: 2 }}>
-            Generate a mix of recommended tracks based on your top artists
+          <Typography
+            sx={{
+              maxWidth: 320,
+              pb: 3,
+              pt: 3,
+              fontSize: 22,
+              color: "darkgrey",
+            }}
+          >
+            <strong>
+              {" "}
+              Generate a mix of recommended tracks based on your top artists
+            </strong>
           </Typography>
           <Button
             variant="contained"
             onClick={handleRefresh}
+            size="large"
             sx={{
               m: 1,
               textTransform: "none",
-              backgroundColor: "#353753",
+              fontSize: 18,
+              backgroundColor: "#46476d",
               ":hover": {
-                backgroundColor: "#46476d",
+                backgroundColor: "#353753",
               },
             }}
           >
@@ -54,20 +71,54 @@ export default function GeneratePlaylist({
           </Button>
         </div>
       </div>
-      <Button
-        variant="contained"
-        onClick={handlePlaylistBtn}
-        sx={{
-          textTransform: "none",
-          backgroundColor: "#353753",
-          ":hover": {
-            backgroundColor: "#46476d",
+
+      <Tooltip
+        componentsProps={{
+          tooltip: {
+            sx: {
+              bgcolor: alpha("#3c3f5f", 0.98),
+              "& .MuiTooltip-arrow": {
+                color: alpha("#3c3f5f", 0.98),
+              },
+              minWidth: 350,
+            },
           },
         }}
-        size="large"
+        title={
+          <React.Fragment>
+            <Typography
+              color="#FBFBFB"
+              sx={{
+                p: 2,
+                minWidth: 300,
+                textAlign: "center",
+              }}
+            >
+              Generate a playlist in your spotify account with the recommended
+              tracks!
+            </Typography>
+          </React.Fragment>
+        }
+        arrow
       >
-        Generate Playlist
-      </Button>
+        <Button
+          variant="contained"
+          onClick={handlePlaylistBtn}
+          sx={{
+            m: 1,
+            fontSize: 18,
+            textTransform: "none",
+            backgroundColor: "#46476d",
+            ":hover": {
+              backgroundColor: "#353753",
+            },
+          }}
+          size="large"
+        >
+          Generate Playlist
+        </Button>
+      </Tooltip>
+      <p></p>
     </div>
   );
 }
