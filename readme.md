@@ -1,53 +1,43 @@
 <p align="center">
   <h1> <a href="https://topify-web.herokuapp.com/">
-    <img src="https://github.com/hemani-gajjar/Topify/blob/master/client/public/topify-logo.svg" alt="Logo" width="80" height="80">
+    <img src="https://github.com/hemani-gajjar/Topify/blob/master/client/public/topify-logo.svg" alt="Logo" width="40" height="40">
   </a> Topify</h1>
   <p>
-   Web Application for Spotify users to view their top tracks and artists statistics.
-    <br />
-    <a href="https://topify-web.herokuapp.com/"><strong>View Live</strong></a>
+   Web interface for Spotify users to look at their top tracks and artists statistics. Users are authenticated with Spotify to get the required data.
   </p>
 </p>
 
-<!-- ABOUT THE PROJECT -->
-
-## About The Project
-
-<p>Topify is a web interface for Spotify users to look at their top tracks and artists.
-Users are authenticated with spotify to get the required data. </p>
-Project Repository Link: https://github.com/hemani-gajjar/Topify
-
 ## Application Functinalties
 
-1. Authentication using Spotify Account with required permissions from the user.<br/>
-2. View top tracks with the following details (based on the chosen time duration from the options "last month", "last 6 months" and "all time"):
+1. Authentication using Spotify Account with required permissions from the user
+2. View top tracks with the following details (based on the chosen time duration from the options `last month` `last 6 months` and `all time`):
 
    - Full Title of the track
-   - First Artist of the track
+   - First Artist of the track (If multiple)
    - Type of the track (Single / Part of an Album)
    - Album Name (If the track is part of an Album)
    - Track No. in the Album
    - Popularity on Spotify (Out of 100)
    - Release Date
 
-3. View top artists with the following details (based on the chosen time duration from the options "last month", "last 6 months" and "all time"):
+3. View top artists with the following details (based on the chosen time duration from the options `last month` `last 6 months` and `all time`):
 
    - Full name of the artist
    - Artist Genres
    - Popularity on Spotify (Out of 100)
 
 4. Expand / Collapse the number of top tracks and artists.<br/>
-5. View your most unique tracks and artists on Spotify (Tracks and Artists that have listedn to having the lesser popularity on Spotify)
+5. View your most unique tracks and artists on Spotify (Tracks and Artists that user has listened to having lesser popularity on Spotify)
 6. Discover music based on your taste:
 
-- Generate a playlist of recommended tracks based on a random mix of your top artists
-- Refresh the artists list to choose from the combinations
+   - Generate a playlist of recommended tracks based on a random mix of your top artists
+   - Refresh the artists list to choose from the combinations
 
 ## Demonstration video
 
 Take a look at the video or find the video [here](https://github.com/hemani-gajjar/Topify/tree/master/client/public/Videos)
 
-https://user-images.githubusercontent.com/68991381/178066955-7e9ef2d5-6939-4359-a6d3-554f889bb7f5.mp4
+https://user-images.githubusercontent.com/68991381/179614154-1de3a530-b7e5-4f0a-aebc-4b88aab1c89d.mp4
 
 ## Installation
 
