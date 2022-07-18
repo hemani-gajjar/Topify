@@ -1,7 +1,9 @@
 <p align="center">
-  <h1>![topify-logo](https://github.com/hemani-gajjar/Topify/blob/master/client/public/topify-logo.svg) Topify</h1>
+  <h1> <a href="https://topify-web.herokuapp.com/">
+    <img src="https://github.com/hemani-gajjar/Topify/blob/master/client/public/topify-logo.svg" alt="Logo" width="80" height="80">
+  </a> Topify</h1>
   <p>
-   Web Application for Spotify users to view  their top tracks and artists statistics.
+   Web Application for Spotify users to view their top tracks and artists statistics.
     <br />
     <a href="https://topify-web.herokuapp.com/"><strong>View Live</strong></a>
   </p>
@@ -20,25 +22,25 @@ Project Repository Link: https://github.com/hemani-gajjar/Topify
 1. Authentication using Spotify Account with required permissions from the user.<br/>
 2. View top tracks with the following details (based on the chosen time duration from the options "last month", "last 6 months" and "all time"):
 
-   1. Full Title of the track
-   2. First Artist of the track
-   3. Type of the track (Single / Part of an Album)
-   4. Album Name (If the track is part of an Album)
-   5. Track No. in the Album
-   6. Popularity on Spotify (Out of 100)
-   7. Release Date
+   - Full Title of the track
+   - First Artist of the track
+   - Type of the track (Single / Part of an Album)
+   - Album Name (If the track is part of an Album)
+   - Track No. in the Album
+   - Popularity on Spotify (Out of 100)
+   - Release Date
 
 3. View top artists with the following details (based on the chosen time duration from the options "last month", "last 6 months" and "all time"):
 
-   1. Full name of the artist
-   2. Artist Genres
-   3. Popularity on Spotify (Out of 100)
+   - Full name of the artist
+   - Artist Genres
+   - Popularity on Spotify (Out of 100)
 
 4. Expand / Collapse the number of top tracks and artists.<br/>
 5. View your most unique tracks and artists on Spotify (Tracks and Artists that have listedn to having the lesser popularity on Spotify)
 6. Discover music based on your taste:
 
-- Generate a plylist of recommended tracks based on a random mix of your top artists
+- Generate a playlist of recommended tracks based on a random mix of your top artists
 - Refresh the artists list to choose from the combinations
 
 ## Demonstration video
@@ -47,7 +49,9 @@ Take a look at the video or find the video [here](https://github.com/hemani-gajj
 
 https://user-images.githubusercontent.com/68991381/178066955-7e9ef2d5-6939-4359-a6d3-554f889bb7f5.mp4
 
-### Installation
+## Installation
+
+---
 
 To get a local copy up and running follow these simple steps:
 
@@ -56,11 +60,7 @@ To get a local copy up and running follow these simple steps:
 - [NodeJS](https://nodejs.org/en/)
 - [npm](https://docs.npmjs.com/cli/v8/configuring-npm/install)
 
-### Installation
-
----
-
-### Client-Side Setup
+#### Client-Side Setup
 
 1. Clone the repo
 
@@ -81,7 +81,7 @@ To get a local copy up and running follow these simple steps:
 
    This command runs the react app in the development mode. Open http://localhost:3000 to view it in the browser. The server will reload if you make edits. You will also see any lint errors in the console.
 
-### Server-Side Setup
+#### Server-Side Setup
 
 1. In the `server` directory, install required NPM packages
    ```sh
@@ -110,3 +110,4 @@ To get a local copy up and running follow these simple steps:
 - [Axios](https://axios-http.com/docs/intro)
 - [Font Awesome](https://fontawesome.com/)
 - [Bootstrap](https://getbootstrap.com/)
+- [Material UI](https://mui.com/)
