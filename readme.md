@@ -1,13 +1,13 @@
-<p align="center">
+<p>
   <h1> <a href="https://topify-web.herokuapp.com/">
-    <img src="https://github.com/hemani-gajjar/Topify/blob/master/client/public/topify-logo.svg" alt="Logo" width="40" height="40">
+    <img src="https://github.com/hemani-gajjar/Topify/blob/master/client/public/topify-logo.svg" alt="Logo" width="30" height="30">
   </a> Topify</h1>
   <p>
-   Web interface for Spotify users to look at their top tracks and artists statistics. Users are authenticated with Spotify to get the required data.
+      Web interface for Spotify users to look at their top tracks and artists statistics. Users are authenticated with Spotify to get the required data.
   </p>
 </p>
 
-## Application Functinalties
+## Application Functionalities
 
 1. Authentication using Spotify Account with required permissions from the user
 2. View top tracks with the following details (based on the chosen time duration from the options `last month` `last 6 months` and `all time`):
@@ -40,8 +40,6 @@ Take a look at the video or find the video [here](https://github.com/hemani-gajj
 https://user-images.githubusercontent.com/68991381/179614154-1de3a530-b7e5-4f0a-aebc-4b88aab1c89d.mp4
 
 ## Installation
-
----
 
 To get a local copy up and running follow these simple steps:
 
