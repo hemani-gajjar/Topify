@@ -1,11 +1,9 @@
-<p>
-  <h1> <a href="https://topify-web.herokuapp.com/">
-    <img src="https://github.com/hemani-gajjar/Topify/blob/master/client/public/topify-logo.svg" alt="Logo" width="30" height="30">
-  </a> Topify</h1>
+  <a href="https://topify-web.herokuapp.com/">
+    <img src="https://github.com/hemani-gajjar/Topify/blob/master/client/public/topify-logo.svg" alt="Logo" width="40" height="40">
+  </a> <h1> Topify</h1>
   <p>
       Web interface for Spotify users to look at their top tracks and artists statistics. Users are authenticated with Spotify to get the required data.
   </p>
-</p>
 
 ## Application Functionalities
 
