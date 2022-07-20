@@ -6,7 +6,7 @@
   </p>
   
   
-- Note: Spotify introduced a few changes to the developer platform mentioned [here(https://developer.spotify.com/community/news/2021/05/27/improving-the-developer-and-user-experience-for-third-party-apps/). Topify comes under `Development Mode` which designed to help developers explore Spotify APIs, and caters for apps that are under development, personal use, or are intended for a small number of users. I can invite up to 25 Spotify users to use the Development Mode app. So reach out to me if you need access to the web application :)
+- Note: Spotify introduced a few changes to the developer platform mentioned [here](https://developer.spotify.com/community/news/2021/05/27/improving-the-developer-and-user-experience-for-third-party-apps/). Topify comes under `Development Mode` which designed to help developers explore Spotify APIs, and caters for apps that are under development, personal use, or are intended for a small number of users. I can invite up to 25 Spotify users to use the Development Mode app. So reach out to me if you need access to the web application :)
 
 ## Application Functionalities
 
