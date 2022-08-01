@@ -8,7 +8,7 @@ export default function useAuth(code) {
 
   useEffect(() => {
     axios
-      .post("http://localhost:5000/login", {
+      .post("https://topify-web.herokuapp.com/login", {
         code,
       })
       .then(function (res) {
@@ -31,7 +31,7 @@ export default function useAuth(code) {
 
       const interval = setInterval(() => {
         axios
-          .post("http://localhost:5000/refresh", {
+          .post("https://topify-web.herokuapp.com/refresh", {
             refreshToken,
           })
           .then(function (res) {
